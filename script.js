@@ -1,21 +1,23 @@
 const canvas = document.getElementById("spillbrett")
 const ctx = canvas.getContext('2d')
 
-const paddleWidth = 5;
-const paddleHeight = 30;
+const paddleWidth = 20;
+const paddleHeight = 120;
 
-let yv = 1
-let xv = 1
+let yv = 10
+let xv = 10
 
-const aiSpeed = 1;
+const aiSpeed = 2;
+const fart = 20
 
 let leftPaddleY = canvas.height / 2 - paddleHeight / 2;
 let rightPaddleY = canvas.height / 2 - paddleHeight / 2;
 
+let venstrePoeng = 0
+let høyrePoeng = 0
 
-
-let ballHeight = 5
-let ballWidth = 5
+let ballHeight = 20
+let ballWidth = 20
 
 let ballY = canvas.height / 2 - ballHeight / 2;
 let ballX = canvas.width / 2 - ballWidth / 2;
@@ -45,7 +47,7 @@ function tegnBall() {
 
 
 document.addEventListener("keydown", function (e) {
-    const fart = 5
+    
 
     if (e.key === "w") leftPaddleY -= fart;
     if (e.key === "s") leftPaddleY += fart;
@@ -73,6 +75,27 @@ function flyttBall() {
     if (ballX <= 0 || ballX + ballWidth >= canvas.width) {
         xv *= -1;
     }
+
+    if (
+        ballX <= 10 + paddleWidth &&
+        ballY + ballHeight >= leftPaddleY &&
+        ballY <= leftPaddleY + paddleHeight
+    ) {
+        xv *= -1; // Endre retning på X
+        ballX = 10 + paddleWidth; // Flytt ballen ut av rekkerten for å unngå å sette seg fast
+    }
+    
+    // Kollisjon med høyre rekkert
+    if (
+        ballX + ballWidth >= canvas.width - paddleWidth - 10 &&
+        ballY + ballHeight >= rightPaddleY &&
+        ballY <= rightPaddleY + paddleHeight
+    ) {
+        xv *= -1;
+        ballX = canvas.width - paddleWidth - 10 - ballWidth;
+    }
+
+    
 }
 
 function AI() {
