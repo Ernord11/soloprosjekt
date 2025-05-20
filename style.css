@@ -32,6 +32,11 @@ body {
     font-style: normal;
     color: white;
     font-size: small;
+    width: 80%;
+    margin: auto;
+    letter-spacing: 2px;
+    line-height: 18px;
+
 
 }
 
@@ -53,3 +58,32 @@ canvas {
     height: 500px;
     
   }
+
+#spillbrett2{
+
+    background: black;
+    display: block;
+    margin: 20px auto;
+    width: 800px;
+    height: 400px;
+
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 90%;
+
+}
+
+.Knapp{
+    padding: 20px;
+    border: white solid 5px;
+    text-align: center;
+    text-wrap: nowrap;
+    color: white;
+    font-family: "Press Start 2P", system-ui;
+    width: fit-content;
+    margin: 20px;
+}

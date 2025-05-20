@@ -1,16 +1,15 @@
-const canvas = document.getElementById("spillbrett")
+const canvas = document.getElementById("spillbrett2")
 const ctx = canvas.getContext('2d')
 
 const paddleWidth = 20
 const paddleHeight = 120
 
 
-
-let xv = 7
 let yv = 5
+let xv = 7
 
-const aiSpeed = 4.5;
-const fart = 9
+const aiSpeed = 2.9;
+const fart = 7
 
 let leftPaddleY = canvas.height / 2 - paddleHeight / 2
 let rightPaddleY = canvas.height / 2 - paddleHeight / 2
@@ -38,7 +37,7 @@ function tegnRekkert() {
     ctx.fillRect(10, leftPaddleY, paddleWidth, paddleHeight);
 
 
-    ctx.fillRect(canvas.width - paddleWidth - 10, rightPaddleY, paddleWidth, paddleHeight)
+    
 }
 
 function tegnBall() {
@@ -50,13 +49,6 @@ function tegnBall() {
 
 }
 
-
-function resetBall() {
-    ballX = canvas.width / 7 - ballWidth / 2;
-    ballY = canvas.height / 2 - ballHeight / 2;
-    xv = 7
-    yv = 5
-}
 
 
 document.addEventListener("keydown", function (e) {
@@ -86,28 +78,17 @@ function flyttBall() {
     ballX += xv;
     ballY += yv;
 
-    if (ballX + ballWidth >= canvas.width) {
-        venstrePoeng++;
-        resetBall();
-
-        
-    }
-    
-    if (ballX <= 0) {
-        høyrePoeng++;
-        resetBall();
+   
+    if (ballY <= 0 || ballY + ballHeight >= canvas.height) {
+        yv *= -1;
 
        
     }
 
 
-    if (ballY <= 0 || ballY + ballHeight >= canvas.height) {
-        yv *= -1;
-    }
-
-
     if (ballX <= 0 || ballX + ballWidth >= canvas.width) {
         xv *= -1;
+
     }
 
     if (
@@ -129,48 +110,16 @@ function flyttBall() {
     }
 
    
-    if (
-        ballX + ballWidth >= canvas.width - paddleWidth - 10 &&
-        ballY + ballHeight >= rightPaddleY &&
-        ballY <= rightPaddleY + paddleHeight
-
-    ) {
-        xv *= -1.1;
-        ballX = canvas.width - paddleWidth - 10 - ballWidth;
-
-
-        lyd.currentTime = 0;     
-        lyd2.play();              
-
-        setTimeout(() => {
-            lyd.pause();         
-            lyd.currentTime = 0;
-        }, 500);
-
-    }
+   
 
 
 }
 
 
 
-function tegnScore() {
-    ctx.fillStyle = "white";
-    ctx.font = "40px Arial";
-    ctx.fillText(venstrePoeng, canvas.width / 4, 50);
-    ctx.fillText(høyrePoeng, (canvas.width / 4) * 3, 50);
-}
 
-function AI() {
 
-    if (rightPaddleY + paddleHeight / 2 < ballY + ballHeight / 2) {
-        rightPaddleY += aiSpeed;
-    } else {
-        rightPaddleY -= aiSpeed;
-    }
 
-    rightPaddleY = Math.max(0, Math.min(canvas.height - paddleHeight, rightPaddleY));
-}
 
 
 function draw() {
@@ -182,8 +131,7 @@ function draw() {
     tegnRekkert()
     tegnBall()
     flyttBall()
-    AI()
-    tegnScore()
+    
     flyttSpiller()
 
 
