@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+    height: 100%;
+    background-image: url(images/bakgrunn.jpg); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+
+}
+
+
+
+.L {
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+    margin: 20px;
+}
+
+.M {
+
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 200;
+    font-style: normal;
+    color: white;
+    font-size: small;
+
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    width: 80%;
+    margin: auto;
+}
+
+canvas {
+    background: black;
+    display: block;
+    margin: 20px auto;
+    width: 800px;
+    height: 500px;
+  }
