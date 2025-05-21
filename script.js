@@ -6,11 +6,12 @@ const paddleHeight = 120
 
 
 
-let xv = 7
-let yv = 5
+let xv = 8
+let yv = 4.8
 
-const aiSpeed = 4.5;
-const fart = 9
+
+const aiSpeed = 4.79;
+const fart = 18
 
 let leftPaddleY = canvas.height / 2 - paddleHeight / 2
 let rightPaddleY = canvas.height / 2 - paddleHeight / 2
@@ -54,8 +55,8 @@ function tegnBall() {
 function resetBall() {
     ballX = canvas.width / 7 - ballWidth / 2;
     ballY = canvas.height / 2 - ballHeight / 2;
-    xv = 7
-    yv = 5
+    xv = 8
+    yv = 5.2
 }
 
 
@@ -106,24 +107,21 @@ function flyttBall() {
     }
 
 
-    if (ballX <= 0 || ballX + ballWidth >= canvas.width) {
-        xv *= -1;
-    }
-
-    if (
+     if (
         ballX <= 10 + paddleWidth &&
         ballY + ballHeight >= leftPaddleY &&
         ballY <= leftPaddleY + paddleHeight
     ) {
-        xv *= -1.1;
-        ballX = 10 + paddleWidth; 
+        xv *= -1.1
+        yv *= 1.02
+        ballX = 10 + paddleWidth
         
-        lyd.currentTime = 0.7;     
+        lyd.currentTime = 0.7 
         lyd.play();              
 
         setTimeout(() => {
             lyd.pause();         
-            lyd.currentTime = 0;
+            lyd.currentTime = 0
         }, 500);
 
     }
@@ -136,6 +134,7 @@ function flyttBall() {
 
     ) {
         xv *= -1.1;
+        yv *= 1.02
         ballX = canvas.width - paddleWidth - 10 - ballWidth;
 
 

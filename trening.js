@@ -9,7 +9,7 @@ let yv = 5
 let xv = 7
 
 const aiSpeed = 2.9;
-const fart = 7
+const fart = 11
 
 let leftPaddleY = canvas.height / 2 - paddleHeight / 2
 let rightPaddleY = canvas.height / 2 - paddleHeight / 2
@@ -96,7 +96,7 @@ function flyttBall() {
         ballY + ballHeight >= leftPaddleY &&
         ballY <= leftPaddleY + paddleHeight
     ) {
-        xv *= -1.1;
+        xv *= -1;
         ballX = 10 + paddleWidth; 
         
         lyd.currentTime = 0.7;     
