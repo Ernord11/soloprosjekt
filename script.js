@@ -1,3 +1,4 @@
+
 const canvas = document.getElementById("spillbrett");
 const ctx = canvas.getContext('2d');
 const pauseBtn = document.getElementById("Pause");
@@ -7,8 +8,8 @@ pauseBtn.addEventListener("click", pauseFunc);
 const paddleWidth = 20;
 const paddleHeight = 120;
 
-const aiSpeed = 5
-const fart = 30;
+const aiSpeed = 5.3
+const fart = 15;
 
 let leftPaddleY = canvas.height / 2 - paddleHeight / 2;
 let rightPaddleY = canvas.height / 2 - paddleHeight / 2;
@@ -56,7 +57,7 @@ function resetBall() {
 
         let speedY;
         do {
-            speedY = 2 + Math.random() * 3;
+            speedY = 3 + Math.random() * 3;
         } while (speedY < aiSpeed)
 
         xv = directionX * speedX;
@@ -79,8 +80,8 @@ document.addEventListener("keyup", function (e) {
 function flyttSpiller() {
     if (ballPause) return;
 
-    if (wPressed) leftPaddleY -= fart / 2;
-    if (sPressed) leftPaddleY += fart / 2;
+    if (wPressed) leftPaddleY -= fart 
+    if (sPressed) leftPaddleY += fart 
 
     leftPaddleY = Math.max(0, Math.min(canvas.height - paddleHeight, leftPaddleY));
 }
@@ -115,7 +116,7 @@ function flyttBall() {
         ballY <= leftPaddleY + paddleHeight
     ) {
         xv *= -1.1;
-        yv *= 1.1;
+        yv *= 1.02;
         ballX = 10 + paddleWidth;
 
         lyd.currentTime = 0.75;
@@ -132,7 +133,7 @@ function flyttBall() {
         ballY <= rightPaddleY + paddleHeight
     ) {
         xv *= -1.1;
-        yv *= 1.1;
+        yv *= 1.02;
         
         ballX = canvas.width - paddleWidth - 10 - ballWidth;
 
