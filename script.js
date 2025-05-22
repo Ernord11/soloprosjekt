@@ -7,7 +7,7 @@ pauseBtn.addEventListener("click", pauseFunc);
 const paddleWidth = 20;
 const paddleHeight = 120;
 
-const aiSpeed = 4.79;
+const aiSpeed = 5
 const fart = 30;
 
 let leftPaddleY = canvas.height / 2 - paddleHeight / 2;
@@ -56,11 +56,11 @@ function resetBall() {
 
         let speedY;
         do {
-            speedY = 3 + Math.random() * 3;
-        } while (speedY < aiSpeed);
+            speedY = 2 + Math.random() * 3;
+        } while (speedY < aiSpeed)
 
         xv = directionX * speedX;
-        yv = directionY * speedY;
+        yv = directionY * speedY
 
         ballPause = false;
     }, 1000);
@@ -115,7 +115,7 @@ function flyttBall() {
         ballY <= leftPaddleY + paddleHeight
     ) {
         xv *= -1.1;
-        yv *= 1.02;
+        yv *= 1.1;
         ballX = 10 + paddleWidth;
 
         lyd.currentTime = 0.75;
@@ -132,7 +132,7 @@ function flyttBall() {
         ballY <= rightPaddleY + paddleHeight
     ) {
         xv *= -1.1;
-        yv *= 1.05;
+        yv *= 1.1;
         
         ballX = canvas.width - paddleWidth - 10 - ballWidth;
 
