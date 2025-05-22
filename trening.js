@@ -9,7 +9,7 @@ let yv = 5
 let xv = 7
 
 const aiSpeed = 2.9;
-const fart = 11
+const fart = 30
 
 let leftPaddleY = canvas.height / 2 - paddleHeight / 2
 let rightPaddleY = canvas.height / 2 - paddleHeight / 2
