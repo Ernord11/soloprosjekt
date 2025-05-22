@@ -1,14 +1,11 @@
 const canvas = document.getElementById("spillbrett");
 const ctx = canvas.getContext('2d');
-const pauseBtn = document.getElementById("Pause")
+const pauseBtn = document.getElementById("Pause");
 
-pauseBtn.addEventListener("click", pauseFunc)
+pauseBtn.addEventListener("click", pauseFunc);
 
 const paddleWidth = 20;
 const paddleHeight = 120;
-
-let xv = 8;
-let yv = 4.8;
 
 const aiSpeed = 4.79;
 const fart = 30;
@@ -22,16 +19,18 @@ let høyrePoeng = 0;
 let ballHeight = 20;
 let ballWidth = 20;
 
+let ballX;
+let ballY;
+let xv = 0;
+let yv = 0;
+
 let wPressed = false;
 let sPressed = false;
 
 const lyd = document.getElementById("pongLyd");
 const lyd2 = document.getElementById("popLyd");
 
-let ballY = canvas.height / 2 - ballHeight / 2;
-let ballX = canvas.width / 7 - ballWidth / 2;
-
-let ballPaused = false;
+let ballPause = false;
 
 function tegnRekkert() {
     ctx.fillStyle = "white";
@@ -45,27 +44,25 @@ function tegnBall() {
 }
 
 function resetBall() {
-    ballPaused = true;
-
+    ballPause = true;
     ballX = canvas.width / 2 - ballWidth / 2;
     ballY = canvas.height / 2 - ballHeight / 2;
-    xv = 0;
-    yv = 0;
 
     setTimeout(() => {
         const directionX = Math.random() < 0.5 ? -1 : 1;
         const directionY = Math.random() < 0.5 ? -1 : 1;
 
         const speedX = 6 + Math.random() * 4;
-        let speedY;
 
+        let speedY;
         do {
             speedY = 3 + Math.random() * 3;
         } while (speedY < aiSpeed);
 
         xv = directionX * speedX;
         yv = directionY * speedY;
-        ballPaused = false;
+
+        ballPause = false;
     }, 1000);
 }
 
@@ -80,9 +77,7 @@ document.addEventListener("keyup", function (e) {
 });
 
 function flyttSpiller() {
-
-    if(ballPaused)return
-
+    if (ballPause) return;
 
     if (wPressed) leftPaddleY -= fart / 2;
     if (sPressed) leftPaddleY += fart / 2;
@@ -91,7 +86,7 @@ function flyttSpiller() {
 }
 
 function flyttBall() {
-    if (ballPaused) return;
+    if (ballPause) return;
 
     ballX += xv;
     ballY += yv;
@@ -99,12 +94,14 @@ function flyttBall() {
     if (ballX + ballWidth >= canvas.width) {
         venstrePoeng++;
         resetBall();
+        resetPadle();
         return;
     }
 
     if (ballX <= 0) {
         høyrePoeng++;
         resetBall();
+        resetPadle();
         return;
     }
 
@@ -112,7 +109,6 @@ function flyttBall() {
         yv *= -1;
     }
 
-    // Kollisjon med venstre racket
     if (
         ballX <= 10 + paddleWidth &&
         ballY + ballHeight >= leftPaddleY &&
@@ -120,28 +116,24 @@ function flyttBall() {
     ) {
         xv *= -1.1;
         yv *= 1.02;
-        
         ballX = 10 + paddleWidth;
 
-        lyd.currentTime = 0.7;
+        lyd.currentTime = 0.75;
         lyd.play();
         setTimeout(() => {
             lyd.pause();
             lyd.currentTime = 0;
-        }, 500);
+        }, 400);
     }
 
-    // Kollisjon med høyre racket
     if (
         ballX + ballWidth >= canvas.width - paddleWidth - 10 &&
         ballY + ballHeight >= rightPaddleY &&
         ballY <= rightPaddleY + paddleHeight
     ) {
         xv *= -1.1;
-        yv *= 1.02;
-        if (Math.abs(yv) < aiSpeed) {
-            yv = aiSpeed * Math.sign(yv);
-        }
+        yv *= 1.05;
+        
         ballX = canvas.width - paddleWidth - 10 - ballWidth;
 
         lyd.currentTime = 0;
@@ -149,8 +141,13 @@ function flyttBall() {
         setTimeout(() => {
             lyd2.pause();
             lyd2.currentTime = 0;
-        }, 500);
+        }, 400);
     }
+}
+
+function resetPadle() {
+    leftPaddleY = canvas.height / 2 - paddleHeight / 2;
+    rightPaddleY = canvas.height / 2 - paddleHeight / 2;
 }
 
 function tegnScore() {
@@ -161,7 +158,8 @@ function tegnScore() {
 }
 
 function AI() {
-    if(ballPaused)return
+    if (ballPause) return;
+
     if (rightPaddleY + paddleHeight / 2 < ballY + ballHeight / 2) {
         rightPaddleY += aiSpeed;
     } else {
@@ -171,10 +169,8 @@ function AI() {
     rightPaddleY = Math.max(0, Math.min(canvas.height - paddleHeight, rightPaddleY));
 }
 
-function pauseFunc(){
-
-    ballPaused = !ballPaused
-
+function pauseFunc() {
+    ballPause = !ballPause;
 }
 
 function draw() {
@@ -191,4 +187,5 @@ function draw() {
     requestAnimationFrame(draw);
 }
 
-draw();
+resetBall()
+draw()
