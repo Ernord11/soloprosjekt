@@ -53,7 +53,7 @@ header {
 canvas {
     background: black;
     display: block;
-    margin: 20px auto;
+    margin: 7px auto;
     width: 700px;
     height: 400px;
     
@@ -85,10 +85,21 @@ footer{
     color: white;
     font-family: "Press Start 2P", system-ui;
     width: fit-content;
-    margin: 20px;
+    margin: 10px;
+    text-decoration: none;
 }
 
 main{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+} 
+
+.Knapp:hover {
+    background-color: white;
+    color: purple;
+    cursor: pointer;
+    transition: 0.3s;
+    
 }
