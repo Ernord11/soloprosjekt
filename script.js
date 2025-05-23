@@ -20,10 +20,6 @@ let høyrePoeng = 0;
 let ballHeight = 20;
 let ballWidth = 20;
 
-let ballX;
-let ballY;
-let xv = 0;
-let yv = 0;
 
 let wPressed = false;
 let sPressed = false;
@@ -57,7 +53,7 @@ function resetBall() {
 
         let speedY;
         do {
-            speedY = 3 + Math.random() * 3;
+            speedY = 2.8 + Math.random() * 3;
         } while (speedY < aiSpeed)
 
         xv = directionX * speedX;
