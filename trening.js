@@ -8,7 +8,7 @@ const paddleHeight = 120
 let yv = 5
 let xv = 7
 
-const aiSpeed = 2.9;
+const aiSpeed = 2.9
 const fart = 30
 
 let leftPaddleY = canvas.height / 2 - paddleHeight / 2
@@ -31,10 +31,10 @@ let ballX = canvas.width / 7 - ballWidth / 2
 
 
 function tegnRekkert() {
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "white"
 
 
-    ctx.fillRect(10, leftPaddleY, paddleWidth, paddleHeight);
+    ctx.fillRect(10, leftPaddleY, paddleWidth, paddleHeight)
 
 
     
@@ -52,21 +52,21 @@ function tegnBall() {
 
 
 document.addEventListener("keydown", function (e) {
-    if (e.key === "w") wPressed = true;
-    if (e.key === "s") sPressed = true;
-});
+    if (e.key === "w") wPressed = true
+    if (e.key === "s") sPressed = true
+})
 
 document.addEventListener("keyup", function (e) {
-    if (e.key === "w") wPressed = false;
-    if (e.key === "s") sPressed = false;
-});
+    if (e.key === "w") wPressed = false
+    if (e.key === "s") sPressed = false
+})
 
 function flyttSpiller() {
-    if (wPressed) leftPaddleY -= fart / 2;
-    if (sPressed) leftPaddleY += fart / 2;
+    if (wPressed) leftPaddleY -= fart / 2
+    if (sPressed) leftPaddleY += fart / 2
 
     
-    leftPaddleY = Math.max(0, Math.min(canvas.height - paddleHeight, leftPaddleY));
+    leftPaddleY = Math.max(0, Math.min(canvas.height - paddleHeight, leftPaddleY))
 }
 
 function flyttBall() {
@@ -75,19 +75,19 @@ function flyttBall() {
 
 
 
-    ballX += xv;
-    ballY += yv;
+    ballX += xv
+    ballY += yv
 
    
     if (ballY <= 0 || ballY + ballHeight >= canvas.height) {
-        yv *= -1;
+        yv *= -1
 
        
     }
 
 
     if (ballX <= 0 || ballX + ballWidth >= canvas.width) {
-        xv *= -1;
+        xv *= -1
 
     }
 
@@ -97,15 +97,15 @@ function flyttBall() {
         ballY <= leftPaddleY + paddleHeight
     ) {
         xv *= -1;
-        ballX = 10 + paddleWidth; 
+        ballX = 10 + paddleWidth
         
-        lyd.currentTime = 0.7;     
-        lyd.play();              
+        lyd.currentTime = 0.7   
+        lyd.play()              
 
         setTimeout(() => {
-            lyd.pause();         
-            lyd.currentTime = 0;
-        }, 500);
+            lyd.pause()       
+            lyd.currentTime = 0
+        }, 500)
 
     }
 
@@ -116,15 +116,9 @@ function flyttBall() {
 }
 
 
-
-
-
-
-
-
 function draw() {
 
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "black"
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
 
@@ -139,7 +133,7 @@ function draw() {
 }
 
 
-draw();
+draw() 
 
 
 
